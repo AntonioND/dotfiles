@@ -66,6 +66,11 @@ let g:netrw_dirhistmax = 0
 "set t_Co=256
 "set term=xterm-256color
 
+" Hack for tmux
+if &term == "screen-256color"
+  set term=xterm-256color
+endif
+
 " Color scheme
 "autocmd BufEnter * colorscheme default
 "autocmd BufEnter *.c,*.h,*.cpp,*.hpp colorscheme xterm16-custom
