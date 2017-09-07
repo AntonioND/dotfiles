@@ -1,0 +1,152 @@
+set nocompatible
+
+filetype plugin indent on  " Load plugins according to detected filetype.
+syntax on                  " Enable syntax highlighting.
+
+set textwidth   =80
+
+" At home
+set expandtab              " Use spaces instead of tabs.
+set softtabstop =4         " Tab key indents by 4 spaces.
+set shiftwidth  =4         " >> indents by 4 spaces.
+
+" At work
+"set noexpandtab            " Use tabs.
+"set softtabstop =8         " Tab key indents by 8 spaces.
+"set shiftwidth  =8         " >> indents by 8 spaces.
+
+set shiftround             " >> indents to next multiple of 'shiftwidth'.
+set autoindent             " Indent according to previous line.
+set backspace   =indent,eol,start " Make backspace work as you would expect.
+set hidden                 " Switch between buffers without having to save.
+set laststatus  =2         " Always show statusline.
+set display     =lastline  " Show as much as possible of the last line.
+
+set showmode               " Show current mode in command-line.
+set showcmd                " Show already typed keys when more are expected.
+
+set incsearch              " Highlight while searching with / or ?.
+set hlsearch               " Keep matches highlighted.
+
+set ttyfast                " Faster redrawing.
+set lazyredraw             " Only redraw when necessary.
+
+set splitbelow             " Open new windows below the current window.
+set splitright             " Open new windows right of the current window.
+
+set showmatch              " Highlight matching parenthesis
+set cursorline             " Highlight the current line.
+set wrapscan               " Searches wrap around end-of-file.
+set report      =0         " Always report changed lines.
+set synmaxcol   =160       " Only highlight the first 160 columns.
+
+" Show non-printable characters.
+set list
+let &listchars="tab:> ,trail:_,extends:>,precedes:<,nbsp:$"
+
+" Put all temporary files under the same directory.
+"set backup
+"set backupdir   =$HOME/.vim/files/backup/
+"set backupext   =-vimbackup
+"set backupskip  =
+"set directory   =$HOME/.vim/files/swap//
+"set updatecount =100
+"set undofile
+"set undodir     =$HOME/.vim/files/undo/
+set viminfo     ='100,n$HOME/.vim/files/viminfo
+
+" Disable backup files and viminfo. Keep swap files in the working directory.
+set nobackup
+"set viminfo     =
+
+" Disable creation of '~/.vim/.netrwhist'
+let g:netrw_dirhistmax = 0
+
+" Force 256 colors - Ugly hack
+"set t_Co=256
+"set term=xterm-256color
+
+" Color scheme
+"autocmd BufEnter * colorscheme default
+"autocmd BufEnter *.c,*.h,*.cpp,*.hpp colorscheme xterm16-custom
+set background=dark
+
+" Try to use real color
+if has('termguicolors')
+  set termguicolors
+  "let g:gruvbox_contrast_dark = 'hard'
+  "let g:airline_theme = 'gruvbox'
+  "autocmd BufEnter * colorscheme gruvbox
+  autocmd BufEnter * colorscheme badwolf
+else
+  "set notermguicolors
+  if &t_Co == 256
+    autocmd BufEnter * colorscheme luna-term
+    "autocmd BufEnter * colorscheme moonshine
+    "autocmd BufEnter * colorscheme xterm256-custom
+    "autocmd BufEnter * colorscheme calmar256-dark
+  else
+    autocmd BufEnter * colorscheme xterm16-custom
+  endif
+endif
+
+" Known extensions
+au BufRead,BufNewFile *.asm,*.inc set filetype=gameboy_assembly
+au! Syntax gameboy_assembly source $HOME/.vim/syntax/gbz80.vim
+au BufRead,BufNewFile *.S set filetype=arm_assembly
+au! Syntax arm_assembly source $HOME/.vim/syntax/armasm.vim
+
+" Trailing spaces
+autocmd BufEnter * highlight TrailingSpaces ctermbg=Red guibg=Red
+autocmd BufEnter * let w:m1=matchadd('TrailingSpaces', '\s\+$', -1)
+
+" Line Overflow
+"autocmd BufEnter * highlight LineProximity ctermbg=Yellow guibg=Yellow
+"autocmd BufEnter * let w:m2=matchadd('LineProximity', '\%<81v.\%>75v', -1)
+autocmd BufEnter * highlight LineOverflow ctermbg=Red guibg=Red
+autocmd BufEnter * let w:m3=matchadd('LineOverflow', '\%>80v.\+', -1)
+
+" Mark column 81 as limit
+"autocmd BufEnter * let &colorcolumn="81"
+"autocmd BufEnter * let &colorcolumn=join(range(81,256),",")
+"autocmd BufEnter * let &colorcolumn="81,".join(range(100,256),",")
+"autocmd BufEnter * highlight colorcolumn ctermbg=darkblue guibg=darkblue
+
+" Folding
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+" space open/closes folds
+nnoremap <space> za
+set foldmethod=indent   " fold based on indent level
+
+" Move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
+" highlight last inserted text
+nnoremap gV `[v`]
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" gc ("garbage collect") strips all trailing whitespace
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap gc :%s/\s\+$//<CR> :nohlsearch<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Improved TAB key.
+" Indent if at the beginning of a line. If not, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! CleverTab()
+  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+    return "\<Tab>"
+  else
+    return "\<C-N>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
+
+" `.` scan the current buffer, `b` scan other loaded buffers that are in the
+" buffer list, `u` scan the unloaded buffers that are in the buffer list, `w`
+" scan buffers from other windows, `t` tag completion
+set complete=.,b,u,w,t,]
+
