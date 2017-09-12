@@ -76,11 +76,7 @@
     local -h termwidth
     local -h right_prompt_length left_prompt_length
     local -h time_ branch_ dir_
-
-    # In case you want to have `user@hostname` in the prompt
-    #local -h host user
-    #user=`whoami` # "%n"
-    #host=`hostname` # "%m"
+    local -h host user
 
     # Get a string describing the current HEAD if we are in a git repository
     function get_git_branch() {
@@ -92,10 +88,12 @@
         fi
     }
 
-    update_left_prompt_length() {
+    update_left_prompt() {
+        user=`whoami`
+        host=`hostname`
         local -h left_prompt_naked
         # Create string to calculate lenght. Time always uses the same space
-        left_prompt_naked="[00:00:00] [$dir_]"
+        left_prompt_naked="00:00:00 $user@$host [$dir_]"
         (( left_prompt_length = $(printf "%s" "$left_prompt_naked" | wc -m) ))
     }
 
@@ -112,18 +110,18 @@
 
     update_curdir() { dir_=`printf "%s" "${PWD/#$HOME/~}"` }
     # Callback called by zsh when changing dir
-    chpwd() { update_curdir ; update_left_prompt_length }
+    chpwd() { update_curdir ; update_left_prompt }
 
     # Refresh prompt at the start of zsh by calling all refresh functions
     update_termwidth
     update_curdir
-    update_left_prompt_length
 
     # Callback called by zsh before showing the prompt.
     precmd() {
 
         time_=`date +%X`
 
+        update_left_prompt
         update_right_prompt
 
         local -h total_length
@@ -138,8 +136,11 @@
 
         local -h final_prompt
         final_prompt=(
-        #   "%F{green}"  "$user"  "%F{red}"  "@"  "%F{green}"  "$host"  "%f"
-            "%B"  "%f%k"  "[$time_] "  "%F{blue}"  "[$dir_]"  "%f%k"  "%b"
+            "%B"
+            "%f%k" "$time_ "
+            "%F{green}"  "$user"  "%F{yellow}"  "@"  "%F{green}"  "$host "  "%f"
+            "%F{blue}"  "[$dir_]"  "%f%k"
+            "%b"
             "$padding"
             "%F{yellow}"  "$branch_"  "%f"
             $'\n'
