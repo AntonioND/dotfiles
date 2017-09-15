@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #Oh My Zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git oh-my-zsh
