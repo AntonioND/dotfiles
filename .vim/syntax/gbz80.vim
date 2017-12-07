@@ -43,7 +43,7 @@ syn keyword gbz80OrgDirs BANK SECTION ALIGN
 syn keyword gbz80OrgDirs HOME CODE DATA BSS
 syn keyword gbz80OrgDirs ROM0 ROMX VRAM WRAM SRAM WRAM0 WRAMX HRAM
 
-syn keyword gbz80Type DB DS DW
+syn keyword gbz80Type DB DS DW DL
 
 " Strings
 syn region gbz80String start=/"/ skip=/\\"/ end=/"/ oneline
