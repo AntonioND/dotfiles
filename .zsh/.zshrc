@@ -224,6 +224,8 @@
     alias grep='grep --color=auto --exclude-dir=.git'
     # Recursive, show line numbers, ignore binary files
     alias grepp='grep -IRn'
+    # Change the color scheme
+    export GREP_COLORS="fn=34:mc=01;30:ms=1;33:sl=21:cx=31"
 
     # Console git tree
     alias gitl='git log --oneline --graph --color --decorate'
