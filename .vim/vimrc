@@ -7,12 +7,14 @@ set textwidth   =80
 
 " At home
 set expandtab              " Use spaces instead of tabs.
-set softtabstop =4         " Tab key indents by 4 spaces.
+set tabstop     =4         " Tabs are 4 spaces
+set softtabstop =4         " Tab and backspace keys indent by 4 spaces.
 set shiftwidth  =4         " >> indents by 4 spaces.
 
 " At work
 "set noexpandtab            " Use tabs.
-"set softtabstop =8         " Tab key indents by 8 spaces.
+"set tabstop     =8         " Tabs are 8 spaces
+"set softtabstop =8         " Tab and backspace keys indent by 8 spaces.
 "set shiftwidth  =8         " >> indents by 8 spaces.
 
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
