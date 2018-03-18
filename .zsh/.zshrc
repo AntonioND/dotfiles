@@ -193,11 +193,6 @@
     setopt auto_pushd
 
 # Completion
-    # Cygwin fix :
-    # If you don't want compinit called here, place the line
-    # skip_global_compinit=1
-    # in your $ZDOTDIR/.zshenv or $ZDOTDIR/.zprofice
-
     if [ -z "$skip_global_compinit" ]; then
         autoload -U compinit
         compinit -C
@@ -205,7 +200,8 @@
     zmodload zsh/complist
 
     setopt extended_glob
-    setopt magic_equal_subst # Do globbing on unquoted command parameters like "param=value"
+    # Do globbing on unquoted command parameters like "param=value"
+    setopt magic_equal_subst
     setopt numeric_glob_sort
     setopt mark_dirs
     setopt rc_expand_param
@@ -237,7 +233,6 @@
     # cd-gitroot plugin
     alias gcd='cd-gitroot'
 
-    #alias mplayer='mplayer -vo fbdev -zoom -x 800 -y 600' #pour avoir le framebuffer actif en console
     alias cv='cp -Rva'
 
     # Colorize output, ignore GIT directory
