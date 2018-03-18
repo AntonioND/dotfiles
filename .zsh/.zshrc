@@ -161,13 +161,31 @@
     HISTSIZE=1000;
     SAVEHIST=$HISTSIZE;
     export HISTFILE SAVEHIST;
-    unsetopt share_history # Do not share history between instances. Can use "fc -W" and "fc -R" to do it
-    setopt hist_ignore_all_dups # No duplicates in hitory
-    setopt hist_ignore_space # Do not add commands with leading whitespace to history
-    setopt hist_no_store # Do not store calls to "history" command in history
-    setopt hist_reduce_blanks # Remove superfluous blanks in command before adding to history
-    setopt hist_verify # Display the command before executing it when using "!"
+
+    # Share history between instances
+    setopt share_history
     setopt append_history
+
+    # Do not store calls to "history" command in history
+    setopt hist_no_store
+    # Expire duplicate entries first when trimming history.
+    setopt hist_expire_dups_first
+    # Do not record an entry that was just recorded again.
+    setopt hist_ignore_dups
+    # Delete old recorded entry if new entry is a duplicate.
+    setopt hist_ignore_all_dups
+    # Do not display a line previously found.
+    setopt hist_find_no_dups
+    # Record entries starting with a space.
+    unsetopt hist_ignore_space
+    # Do not write duplicate entries in the history file.
+    setopt hist_save_no_dups
+    # Remove superfluous blanks before recording entry.
+    setopt hist_reduce_blanks
+    # Display the command before executing it when using "!"
+    setopt hist_verify
+    # Beep when accessing nonexistent history.
+    setopt hist_beep
 
 # cd
     #setopt auto_pushd  # "cd +" completion with tab and directory history stack
@@ -229,9 +247,6 @@
 
     # Console git tree
     alias gitl='git log --oneline --graph --color --decorate'
-
-    # Import history from all other running shells immediatly
-    alias hist-sync='fc -IR'
 
     # Less configuration
     LESS="-SRXI"
