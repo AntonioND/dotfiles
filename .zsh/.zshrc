@@ -82,7 +82,7 @@
     function get_git_branch() {
         if git rev-parse --git-dir > /dev/null 2>&1; then
             # This is a valid git repository (but maybe not the top level).
-            git describe --all
+            git describe --all 2>/dev/null
         else
             echo ""
         fi
