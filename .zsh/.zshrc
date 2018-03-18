@@ -69,6 +69,7 @@
     setopt auto_continue
     setopt c_bases
     setopt csh_junkie_loops
+    unsetopt auto_cd
 
 # Prompt
 
@@ -188,7 +189,8 @@
     setopt hist_beep
 
 # cd
-    #setopt auto_pushd  # "cd +" completion with tab and directory history stack
+    # Make cd push the old directory onto the directory stack.
+    setopt auto_pushd
 
 # Completion
     # Cygwin fix :
