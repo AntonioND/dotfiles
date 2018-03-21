@@ -167,6 +167,16 @@
 
     # Console git tree
     alias gitl='git log --oneline --graph --color --decorate'
+    # Checkout the GitHub pull request ID passed as argument
+    function git-checkout-pr() {
+        if [ -n "$1" ]; then
+            if git fetch origin pull/$1/head; then
+                git checkout FETCH_HEAD
+            fi
+        else
+            echo "Pull request ID not provided."
+        fi
+    }
 
     # Less configuration
     LESS="-SRXI"
