@@ -169,6 +169,10 @@
 
     # Console git tree
     alias gitl='git log --oneline --graph --color --decorate'
+
+    # Show list of commits per author
+    alias git-authors='git shortlog -s -n --no-merges'
+
     # Checkout the GitHub pull request ID passed as argument
     function git-checkout-pr() {
         if [ -n "$1" ]; then
