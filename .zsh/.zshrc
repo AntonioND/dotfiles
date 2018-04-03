@@ -86,8 +86,10 @@
     SAVEHIST=$HISTSIZE;
     export HISTFILE SAVEHIST;
 
-    # Share history between instances
-    setopt share_history
+    # Don't share history between instances
+    #setopt share_history
+
+    # Append history list to the history file, rather than replace it.
     setopt append_history
 
     # Do not store calls to "history" command in history
