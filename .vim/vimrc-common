@@ -148,16 +148,3 @@ set complete=.,b,u,w,t,]
 
 " Open/Close NERDTree with Ctrl+t
 map <C-t> :NERDTreeToggle<CR>
-
-""""""""""""""""""""""""""""""""""
-" ALE (Asynchronous Lint Engine) "
-""""""""""""""""""""""""""""""""""
-
-" Wait a bit until the linter runs
-let g:ale_lint_delay = 1000
-
-" Don't run linter while in insert mode, only when modifying text in normal mode
-let g:ale_lint_on_text_changed = 'normal'
-
-" Run linter when leaving insert mode
-let g:ale_lint_on_insert_leave = 1
