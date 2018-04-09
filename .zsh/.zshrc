@@ -184,6 +184,9 @@
         fi
     }
 
+    # Configuration for music visualizer
+    alias nausea='nausea -cps /tmp/mpd.fifo'
+
     # Less configuration
     LESS="-SRXI"
 
