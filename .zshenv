@@ -1,1 +1,3 @@
 ZDOTDIR=$HOME/.zsh
+
+PATH=$HOME/bin:$PATH
