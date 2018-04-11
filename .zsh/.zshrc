@@ -6,81 +6,59 @@
 #
 # Global Order: zshenv, zprofile, zshrc, zlogin
 
-#   _________  _   _ ____   ____
-#  |__  / ___|| | | |  _ \ / ___|
-#    / /\___ \| |_| | |_) | |
-# _ / /_ ___) |  _  |  _ <| |___
-#(_)____|____/|_| |_|_| \_\\____|
-#
-
 # Oh My Zsh
 
-    # Path to your oh-my-zsh configuration.
+    # Path to oh-my-zsh configuration
     ZSH=$HOME/.zsh/oh-my-zsh
 
-    # Set name of the theme to load.
-    # Look in ~/.oh-my-zsh/themes/
-    # Optionally, if you set this to "random", it'll load a random theme each
-    # time that oh-my-zsh is loaded.
-    #ZSH_THEME="jreese"
-
-    # Set to this to use case-sensitive completion
+    # Use case-sensitive completion
     CASE_SENSITIVE="true"
 
-    # Comment this out to disable weekly auto-update checks
+    # Disable weekly auto-update checks
     DISABLE_AUTO_UPDATE="true"
 
-    # Uncomment following line if you want to disable colors in ls
-    # DISABLE_LS_COLORS="true"
-
-    # Uncomment following line if you want to disable autosetting terminal title.
+    # Disable autosetting terminal title
     DISABLE_AUTO_TITLE="true"
 
-    # Uncomment following line if you want red dots to be displayed while waiting for completion
-    # COMPLETION_WAITING_DOTS="true"
-
-    # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-    # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-    # Example format: plugins=(rails git textmate ruby lighthouse)
-    # WARNING: Order matters, especially for zsh-syntax-highlighting and history-substring-search
-    plugins=(command-not-found zsh-completions zsh-completion-generator git screen zsh-autosuggestions zsh-navigation-tools zsh-cmd-architect cd-gitroot zsh-syntax-highlighting history-substring-search)
-    # Enable autorrection features in Oh My Zsh, especially exception to autocorrection
-    # that are annoying
-    # ENABLE_CORRECTION="true"
+    # Plugins to load (they can be found in ~/.oh-my-zsh/plugins/*).
+    # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/.
+    # Order matters, especially for zsh-syntax-highlighting.
+    plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 
     source $ZSH/oh-my-zsh.sh
-
-    # zsh-navigation-tool
-    znt_list_border=0
-    # 1 to select entry when Enter is pressed
-    znt_list_instant_select=1
-    # znt_list_colorpair="green/black"
-    # - underline or reverse - how should be active element highlighted
-    znt_history_active_text="reverse"
 
     # zsh-autosuggestions plugin
     ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=blue"
 
 # Misc options
-    setopt interactive_comments
-    setopt path_dirs
+
+    # Print return code of commands with return code different than 0
     setopt print_exit_value
+    # Auto continue jobs disowned with disown
     setopt auto_continue
+    # Use C prefixes for numeric values (hexadecimal 0xFF, octal 077)
     setopt c_bases
+    # Allow CSH-style loops
     setopt csh_junkie_loops
+    # Don't change directory just by typing a path
     unsetopt auto_cd
+    # Make cd push the old directory onto the directory stack.
+    setopt auto_pushd
 
 # Prompt
+
     #source $HOME/.zsh/prompt-nouser.sh
     source $HOME/.zsh/prompt-user.sh
 
 # Editors
+
     READNULLCMD=${PAGER:-/usr/bin/less}
-    export VISUAL=vim
+    export VISUAL=nvim
     export EDITOR="$VISUAL"
 
 # History
+
     HISTFILE=~/.zsh/zsh_history;
     HISTSIZE=1000;
     SAVEHIST=$HISTSIZE;
@@ -113,11 +91,8 @@
     # Beep when accessing nonexistent history.
     setopt hist_beep
 
-# cd
-    # Make cd push the old directory onto the directory stack.
-    setopt auto_pushd
-
 # Completion
+
     if [ -z "$skip_global_compinit" ]; then
         autoload -U compinit
         compinit -C
@@ -148,22 +123,18 @@
     zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 
 # Alias and Environment configuration
+
+    # Colorize ls output by default
     alias ls='ls --color=auto'
-    alias ll='ls --color=auto -lh'
-    alias la='ls --color=auto -lah'
-    alias lll='ls --color=auto -lh | less'
 
     # Resolve the physical path, resolving all the symbolic links
     alias cdd="cd -P"
-    # cd-gitroot plugin
-    alias gcd='cd-gitroot'
 
-    alias cv='cp -Rva'
+    # Less configuration
+    export LESS="-SRXI"
 
     # Colorize output, ignore GIT directory
     alias grep='grep --color=auto --exclude-dir=.git'
-    # Recursive, show line numbers, ignore binary files
-    alias grepp='grep -IRn'
     # Change the color scheme
     export GREP_COLORS='fn=34:mc=01;30:ms=1;33'
 
@@ -184,11 +155,38 @@
         fi
     }
 
+    # Print progress of dd
+    alias dd='dd status=progress'
+
+    # Print progress of basic file operations
+    alias copy='rsync -phr --progress'
+    alias move='rsync -aPhr --remove-source-files'
+
+    # Less typing
+    alias nv='nvim'
+
+    # Color config for ripgrep
+    alias rg="rg --colors 'path:fg:blue' --colors 'path:style:bold' --colors 'line:fg:green' --colors 'match:style:bold' --colors 'match:fg:yellow'"
+
+    # Always ignore files in a .gitignore and .git/ folders
+    alias exa='exa --git-ignore'
+
+    # Print file information
+    alias el='exa -l'
+
+    # Print tree of file information
+    alias ell='exa -lT'
+
+    # Easier name to remember
+    alias music='ncmpcpp'
+
     # Configuration for music visualizer
     alias nausea='nausea -cps /tmp/mpd.fifo'
 
-    # Less configuration
-    LESS="-SRXI"
+# Commands to run before letting the user take control
 
-# Freeze the TTY settings to avoid corruption by badly behaved programs
-ttyctl -f
+    # Freeze the TTY settings to avoid corruption by badly behaved programs
+    ttyctl -f
+
+    # Move prompt to the last row of the terminal
+    #tput cup $LINES 0
