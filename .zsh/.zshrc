@@ -6,30 +6,13 @@
 #
 # Global Order: zshenv, zprofile, zshrc, zlogin
 
-# Oh My Zsh
+# Paths
 
-    # Path to oh-my-zsh configuration
-    ZSH=$HOME/.zsh/oh-my-zsh
+    # Set ZSH_CACHE_DIR to the path where cache files should be created
+    ZSH_CACHE_DIR="${ZDOTDIR}/cache"
 
-    # Use case-sensitive completion
-    CASE_SENSITIVE="true"
-
-    # Disable weekly auto-update checks
-    DISABLE_AUTO_UPDATE="true"
-
-    # Disable autosetting terminal title
-    DISABLE_AUTO_TITLE="true"
-
-    # Plugins to load (they can be found in ~/.oh-my-zsh/plugins/*).
-    # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/.
-    # Order matters, especially for zsh-syntax-highlighting.
-    plugins=(zsh-autosuggestions zsh-syntax-highlighting)
-
-    source $ZSH/oh-my-zsh.sh
-
-    # zsh-autosuggestions plugin
-    ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=blue"
+    # Save the location of the current completion dump file
+    ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump"
 
 # Misc options
 
@@ -64,11 +47,14 @@
     SAVEHIST=$HISTSIZE;
     export HISTFILE SAVEHIST;
 
+    setopt extended_history
+
     # Don't share history between instances
-    #setopt share_history
+    unsetopt share_history
 
     # Append history list to the history file, rather than replace it.
     setopt append_history
+    setopt inc_append_history
 
     # Do not store calls to "history" command in history
     setopt hist_no_store
@@ -93,10 +79,14 @@
 
 # Completion
 
+    source $HOME/.zsh/completion.zsh
+
     if [ -z "$skip_global_compinit" ]; then
         autoload -U compinit
         compinit -C
+        compinit -i -d "${ZSH_COMPDUMP}"
     fi
+
     zmodload zsh/complist
 
     setopt extended_glob
@@ -105,9 +95,6 @@
     setopt numeric_glob_sort
     setopt mark_dirs
     setopt rc_expand_param
-    # Autocorrect commands
-    # Exceptions added by Oh My Zsh (option ENABLE_CORRECTION)
-    #setopt correct_all
 
     # Ignore completion functions for commands you don't have
     zstyle ':completion:*:functions' ignored-patterns '_*'
@@ -121,6 +108,10 @@
     zstyle ':completion:*' cache-path ~/.zsh_cache
     # Colors for process list
     zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
+
+# Key bindings
+
+    source $HOME/.zsh/key-bindings.zsh
 
 # Alias and Environment configuration
 
@@ -190,3 +181,12 @@
 
     # Move prompt to the last row of the terminal
     #tput cup $LINES 0
+
+# Plugins
+
+    source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+    # zsh-autosuggestions
+    ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=blue"
