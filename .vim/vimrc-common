@@ -141,10 +141,3 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 " buffer list, `u` scan the unloaded buffers that are in the buffer list, `w`
 " scan buffers from other windows, `t` tag completion
 set complete=.,b,u,w,t,]
-
-""""""""""""
-" NERDTree "
-""""""""""""
-
-" Open/Close NERDTree with Ctrl+t
-map <C-t> :NERDTreeToggle<CR>
