@@ -6,15 +6,13 @@
 #
 # Global Order: zshenv, zprofile, zshrc, zlogin
 
-# Paths
-
-    # Set ZSH_CACHE_DIR to the path where cache files should be created
-    ZSH_CACHE_DIR="${ZDOTDIR}/cache"
-
-    # Save the location of the current completion dump file
-    ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump"
-
 # Misc options
+
+    # Fix pasted URLs
+    autoload -Uz url-quote-magic
+    zle -N self-insert url-quote-magic
+    autoload -Uz bracketed-paste-magic
+    zle -N bracketed-paste bracketed-paste-magic
 
     # Print return code of commands with return code different than 0
     setopt print_exit_value
@@ -42,10 +40,10 @@
 
 # History
 
-    HISTFILE=~/.zsh/zsh_history;
-    HISTSIZE=1000;
-    SAVEHIST=$HISTSIZE;
-    export HISTFILE SAVEHIST;
+    HISTFILE=$HOME/.zsh/zsh_history
+    HISTSIZE=1000
+    SAVEHIST=$HISTSIZE
+    export HISTFILE SAVEHIST
 
     setopt extended_history
 
@@ -80,34 +78,6 @@
 # Completion
 
     source $HOME/.zsh/completion.zsh
-
-    if [ -z "$skip_global_compinit" ]; then
-        autoload -U compinit
-        compinit -C
-        compinit -i -d "${ZSH_COMPDUMP}"
-    fi
-
-    zmodload zsh/complist
-
-    setopt extended_glob
-    # Do globbing on unquoted command parameters like "param=value"
-    setopt magic_equal_subst
-    setopt numeric_glob_sort
-    setopt mark_dirs
-    setopt rc_expand_param
-
-    # Ignore completion functions for commands you don't have
-    zstyle ':completion:*:functions' ignored-patterns '_*'
-
-    zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
-    zstyle ':completion:*:processes-names' command 'ps -e -o comm='
-    zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
-    # Build completion cache, useful for completions that requires lot of
-    # computations such as the package list
-    zstyle ':completion:*' use-cache on
-    zstyle ':completion:*' cache-path ~/.zsh_cache
-    # Colors for process list
-    zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 
 # Key bindings
 
