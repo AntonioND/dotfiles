@@ -48,7 +48,7 @@ update_curdir
 # Callback called by zsh before showing the prompt.
 precmd() {
 
-    time_=`date +%X`
+    time_=`date +%T`
 
     update_left_prompt
     update_right_prompt

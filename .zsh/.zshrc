@@ -29,8 +29,8 @@
 
 # Prompt
 
-    #source $HOME/.zsh/prompt-nouser.sh
-    source $HOME/.zsh/prompt-user.sh
+    #source $HOME/.zsh/prompt-nouser.zsh
+    source $HOME/.zsh/prompt-user.zsh
 
 # Editors
 

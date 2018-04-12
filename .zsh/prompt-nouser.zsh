@@ -46,7 +46,7 @@ update_left_prompt_length
 # Callback called by zsh before showing the prompt.
 precmd() {
 
-    time_=`date +%X`
+    time_=`date +%T`
 
     update_right_prompt
 
