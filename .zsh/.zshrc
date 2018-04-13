@@ -160,3 +160,11 @@
     # zsh-autosuggestions
     ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=blue"
+
+# Welcome string
+
+    bold=$(tput bold)
+    normal=$(tput sgr0)
+
+    echo "${bold}$(uname -srvmo)${normal}"
+    echo
