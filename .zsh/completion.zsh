@@ -1,5 +1,8 @@
 # Completion options
 
+# Add custom completions to path
+fpath=(${ZDOTDIR}/completions $fpath)
+
 # Set ZSH_CACHE_DIR to the path where cache files should be created
 ZSH_CACHE_DIR="${ZDOTDIR}/cache"
 
