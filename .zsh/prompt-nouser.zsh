@@ -19,7 +19,7 @@ function get_git_branch() {
 update_left_prompt_length() {
     local -h left_prompt_naked
     # Create string to calculate lenght. Time always uses the same space
-    left_prompt_naked="[00:00:00] [$dir_]"
+    left_prompt_naked="00:00:00 [$dir_]"
     (( left_prompt_length = $(printf "%s" "$left_prompt_naked" | wc -m) ))
 }
 
@@ -62,7 +62,7 @@ precmd() {
 
     local -h final_prompt
     final_prompt=(
-        "%B"  "%f%k"  "[$time_] "  "%F{blue}"  "[$dir_]"  "%f%k"  "%b"
+        "%B"  "%f%k"  "$time_ "  "%F{blue}"  "[$dir_]"  "%f%k"  "%b"
         "$padding"
         "%F{yellow}"  "$branch_"  "%f"
         $'\n'
