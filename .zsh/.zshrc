@@ -75,6 +75,17 @@
     # Beep when accessing nonexistent history.
     setopt hist_beep
 
+# Colors
+
+    autoload -U colors && colors
+
+    # Change the color scheme for 'ls'. This has to be done before initializing
+    # the completion options.
+    source ${ZDOTDIR}/dircolors.zsh
+
+    # Change the color scheme for 'grep'
+    export GREP_COLORS='fn=34:mc=01;30:ms=1;33'
+
 # Completion
 
     source ${ZDOTDIR}/completion.zsh
@@ -96,8 +107,6 @@
 
     # Colorize output, ignore GIT directory
     alias grep='grep --color=auto --exclude-dir=.git'
-    # Change the color scheme
-    export GREP_COLORS='fn=34:mc=01;30:ms=1;33'
 
     # Console git tree
     alias gitl='git log --oneline --graph --color --decorate'
