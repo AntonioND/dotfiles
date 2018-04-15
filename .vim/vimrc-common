@@ -66,6 +66,7 @@ set background=dark
 " Try to use real color
 if has('termguicolors')
   set termguicolors
+  " Color scheme
   "let g:gruvbox_contrast_dark = 'hard'
   "let g:airline_theme = 'gruvbox'
   "autocmd BufEnter * colorscheme gruvbox
@@ -73,11 +74,11 @@ if has('termguicolors')
 else
   "set notermguicolors
   if &t_Co == 256
-    autocmd BufEnter * colorscheme luna-term
-    "autocmd BufEnter * colorscheme moonshine
+    " Color scheme
+    autocmd BufEnter * colorscheme moonshine
     "autocmd BufEnter * colorscheme xterm256-custom
-    "autocmd BufEnter * colorscheme calmar256-dark
   else
+    " Color scheme
     autocmd BufEnter * colorscheme xterm16-custom
   endif
 endif
