@@ -29,8 +29,8 @@
 
 # Prompt
 
-    #source $HOME/.zsh/prompt-nouser.zsh
-    source $HOME/.zsh/prompt-user.zsh
+    #source ${ZDOTDIR}/prompt-nouser.zsh
+    source ${ZDOTDIR}/prompt-user.zsh
 
 # Editors
 
@@ -40,7 +40,7 @@
 
 # History
 
-    HISTFILE=$HOME/.zsh/zsh_history
+    HISTFILE=${ZDOTDIR}/zsh_history
     HISTSIZE=1000
     SAVEHIST=$HISTSIZE
     export HISTFILE SAVEHIST
@@ -77,11 +77,11 @@
 
 # Completion
 
-    source $HOME/.zsh/completion.zsh
+    source ${ZDOTDIR}/completion.zsh
 
 # Key bindings
 
-    source $HOME/.zsh/key-bindings.zsh
+    source ${ZDOTDIR}/key-bindings.zsh
 
 # Alias and Environment configuration
 
@@ -154,8 +154,8 @@
 
 # Plugins
 
-    source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source ${ZDOTDIR}/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source ${ZDOTDIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
     # zsh-autosuggestions
     ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
