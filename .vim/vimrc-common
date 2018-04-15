@@ -71,15 +71,33 @@ if has('termguicolors')
   "let g:airline_theme = 'gruvbox'
   "autocmd BufEnter * colorscheme gruvbox
   autocmd BufEnter * colorscheme badwolf
+
+  " Line Overflow
+  autocmd BufEnter * highlight LineProximity guibg=#404000
+  autocmd BufEnter * let w:m2=matchadd('LineProximity', '\%<79v.\%>77v', -1)
+  autocmd BufEnter * highlight LineWarning guibg=#603000
+  autocmd BufEnter * let w:m3=matchadd('LineWarning', '\%<81v.\%>79v', -1)
+  autocmd BufEnter * highlight LineOverflow guibg=#600000
+  autocmd BufEnter * let w:m4=matchadd('LineOverflow', '\%>80v.\+', -1)
 else
   "set notermguicolors
   if &t_Co == 256
     " Color scheme
     autocmd BufEnter * colorscheme moonshine
     "autocmd BufEnter * colorscheme xterm256-custom
+
+    " Line Overflow
+    autocmd BufEnter * highlight LineProximity ctermbg=58 guibg=58
+    autocmd BufEnter * let w:m2=matchadd('LineProximity', '\%<81v.\%>79v', -1)
+    autocmd BufEnter * highlight LineOverflow ctermbg=52 guibg=52
+    autocmd BufEnter * let w:m3=matchadd('LineOverflow', '\%>80v.\+', -1)
   else
     " Color scheme
     autocmd BufEnter * colorscheme xterm16-custom
+
+    " Line Overflow
+    autocmd BufEnter * highlight LineOverflow ctermbg=darkred guibg=darked
+    autocmd BufEnter * let w:m3=matchadd('LineOverflow', '\%>80v.\+', -1)
   endif
 endif
 
@@ -89,15 +107,9 @@ au! Syntax gameboy_assembly source $HOME/.vim/syntax/gbz80.vim
 au BufRead,BufNewFile *.S set filetype=arm_assembly
 au! Syntax arm_assembly source $HOME/.vim/syntax/armasm.vim
 
-" Trailing spaces
+" Trailing spaces - As annoying as they can be
 autocmd BufEnter * highlight TrailingSpaces ctermbg=Red guibg=Red
 autocmd BufEnter * let w:m1=matchadd('TrailingSpaces', '\s\+$', -1)
-
-" Line Overflow
-"autocmd BufEnter * highlight LineProximity ctermbg=Yellow guibg=Yellow
-"autocmd BufEnter * let w:m2=matchadd('LineProximity', '\%<81v.\%>75v', -1)
-autocmd BufEnter * highlight LineOverflow ctermbg=Red guibg=Red
-autocmd BufEnter * let w:m3=matchadd('LineOverflow', '\%>80v.\+', -1)
 
 " Mark column 81 as limit
 "autocmd BufEnter * let &colorcolumn="81"
