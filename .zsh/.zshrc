@@ -179,6 +179,9 @@
     alias copy='rsync -phr --progress'
     alias move='rsync -aPhr --remove-source-files'
 
+    # Print information about the sensors in the computer
+    alias sensors='watch -c -n 1 sensors'
+
     # Less typing
     alias nv='nvim'
 
@@ -205,9 +208,6 @@
     # Freeze the TTY settings to avoid corruption by badly behaved programs
     ttyctl -f
 
-    # Move prompt to the last row of the terminal
-    #tput cup $LINES 0
-
 # Plugins
 
     source ${ZDOTDIR}/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -219,8 +219,8 @@
 
 # Welcome string
 
+    # Print system information
     bold=$(tput bold)
     normal=$(tput sgr0)
-
     echo "${bold}$(uname -srvmo)${normal}"
     echo
