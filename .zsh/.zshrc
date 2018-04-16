@@ -6,6 +6,21 @@
 #
 # Global Order: zshenv, zprofile, zshrc, zlogin
 
+# Start tmux or attach to an existing session
+
+    # If tmux exists in this system
+    if which tmux >/dev/null 2>&1; then
+        # If this terminal isn't already inside tmux
+        if [[ -z "$TMUX" ]] ;then
+            # Look for sessions not attached
+            if tmux ls | grep -v attached; then
+                exec tmux attach
+            else
+                exec tmux
+            fi
+        fi
+    fi
+
 # Misc options
 
     # Fix pasted URLs
@@ -123,6 +138,38 @@
         else
             echo "Pull request ID not provided."
         fi
+    }
+
+    # Kill all tmux sessions
+    alias tkillall='tmux kill-server'
+
+    # Kill chosen tmux session, or the active one if no arguments
+    function tkill() {
+        if [ -n "$1" ]; then
+            tmux kill-session -t "$1"
+        else
+            tmux kill-session
+        fi
+    }
+
+    # Kill chosen tmux pane
+    function tkillpane() {
+        if [ -n "$1" ]; then
+            tmux kill-pane -t "$1"
+        else
+            echo "Pane number not provided."
+        fi
+    }
+
+    # List processes running in the current session
+    function tps() {
+            tmux list-panes -s -F "#{pane_index} #{pane_pid} #{pane_current_command}"
+            tmux display-panes
+    }
+
+    # List tmux sessions
+    function tlist() {
+            tmux list-sessions
     }
 
     # Print progress of dd
