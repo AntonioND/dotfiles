@@ -1,3 +1,5 @@
 ZDOTDIR=$HOME/.zsh
 
 PATH=$HOME/bin:$PATH
+
+umask 0077
