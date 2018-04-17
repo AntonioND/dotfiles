@@ -39,6 +39,14 @@ bindkey '^[[1;5C' forward-word
 # [Ctrl-LeftArrow] Move backward one word
 bindkey '^[[1;5D' backward-word
 
+# This is a list of characters that are considered part of a word. It is used
+# when moving inside the command line with Ctrl-Left and Ctrl-Right. This setup
+# makes the cursor stop at any special character.
+# The default is ```*?_-.[]~=/&;!#$%^(){}<>```, which is not what we want, we
+# want to be able to stop at, at least, the divisions between directories in a
+# path.
+WORDCHARS=''
+
 # [Shift-Tab] Move through the completion menu backwards
 bindkey "${terminfo[kcbt]}" reverse-menu-complete
 

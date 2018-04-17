@@ -16,7 +16,6 @@ fi
 
 zmodload -i zsh/complist
 
-WORDCHARS=''
 # do not autoselect the first completion entry
 unsetopt menu_complete
 unsetopt flowcontrol
