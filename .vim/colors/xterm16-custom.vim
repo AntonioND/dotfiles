@@ -7,7 +7,7 @@ endif
 let colors_name = 'xterm16-custom'
 
 function s:hi( group, attr, fg, bg)
-  exec 'hi' a:group 'cterm='.a:attr 'ctermfg='.a:fg 'ctermbg='.a:bg 
+  exec 'hi' a:group 'cterm='.a:attr 'ctermfg='.a:fg 'ctermbg='.a:bg
                   \ 'gui='.a:attr 'guifg='.a:fg 'guibg='.a:bg
 endfunction
 
