@@ -9,11 +9,11 @@
 # Start tmux or attach to an existing session
 
     # If tmux exists in this system
-    if which tmux >/dev/null 2>&1; then
+    if which tmux 2>&1 >/dev/null; then
         # If this terminal isn't already inside tmux
         if [[ -z "$TMUX" ]] ;then
             # Look for sessions not attached
-            if tmux ls | grep -v attached; then
+            if tmux ls 2>/dev/null | grep -v attached; then
                 exec tmux attach
             else
                 exec tmux
