@@ -114,6 +114,8 @@
     # Colorize ls output by default
     alias ls='ls --color=auto'
 
+    alias ll='ls -l --color=auto'
+
     # Resolve the physical path, resolving all the symbolic links
     alias cdd="cd -P"
 
