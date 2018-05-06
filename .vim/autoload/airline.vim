@@ -1,4 +1,4 @@
-" MIT License. Copyright (c) 2013-2016 Bailey Ling.
+" MIT License. Copyright (c) 2013-2018 Bailey Ling et al.
 " vim: et ts=2 sts=2 sw=2
 
 scriptencoding utf-8
@@ -34,6 +34,7 @@ function! airline#add_inactive_statusline_func(name)
 endfunction
 
 function! airline#load_theme()
+  let g:airline_theme = get(g:, 'airline_theme', 'dark')
   if exists('*airline#themes#{g:airline_theme}#refresh')
     call airline#themes#{g:airline_theme}#refresh()
   endif
@@ -76,7 +77,7 @@ endfunction
 function! airline#switch_matching_theme()
   if exists('g:colors_name')
     let existing = g:airline_theme
-    let theme = substitute(g:colors_name, '-', '_', 'g')
+    let theme = substitute(tolower(g:colors_name), '-', '_', 'g')
     try
       let palette = g:airline#themes#{theme}#palette
       call airline#switch_theme(theme)
@@ -111,11 +112,8 @@ function! airline#update_statusline()
     call s:invoke_funcrefs(context, s:inactive_funcrefs)
   endfor
 
-  unlet! w:airline_render_left
-  unlet! w:airline_render_right
-  for section in s:sections
-    unlet! w:airline_section_{section}
-  endfor
+  unlet! w:airline_render_left w:airline_render_right
+  exe 'unlet! ' 'w:airline_section_'. join(s:sections, ' w:airline_section_')
 
   let w:airline_active = 1
   let context = { 'winnr': winnr(), 'active': 1, 'bufnr': winbufnr(winnr()) }
@@ -196,4 +194,3 @@ function! airline#check_mode(winnr)
 
   return ''
 endfunction
-
