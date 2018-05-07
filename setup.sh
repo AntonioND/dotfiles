@@ -3,10 +3,14 @@
 # neovim config symlink
 # ---------------------
 
+sudo apt install neovim
+
 ln -s -T ~/.vim ~/.config/nvim
 
 # zsh configuration
 # -----------------
+
+sudo apt install zsh
 
 pushd ~/.zsh
 
@@ -24,14 +28,14 @@ popd
 pushd ~/.tmux
 
 # Copy/paste from/to clipboard
-sudo apt-get install xsel
+sudo apt install tmux xsel
 
 # Plugins
 git clone https://github.com/NHDaly/tmux-better-mouse-mode
 
 git clone https://github.com/tmux-plugins/tmux-battery
 
-sudo apt-get install sysstat
+sudo apt install sysstat
 git clone https://github.com/tmux-plugins/tmux-cpu
 
 popd
@@ -39,11 +43,14 @@ popd
 # Download vim plugins
 # --------------------
 
+sudo apt install vim-gtk3
+
 mkdir vim-plugins
 
 pushd vim-plugins
 
 git clone https://github.com/vim-airline/vim-airline
+git clone https://github.com/vim-airline/vim-airline-themes
 git clone https://github.com/tpope/vim-fugitive
 git clone https://github.com/airblade/vim-gitgutter
 
@@ -54,7 +61,7 @@ popd
 # Install mpd, ncmpcpp and nausea
 # -------------------------------
 
-sudo apt-get install mpd mpc ncmpcpp libfftw3-dev libncursesw5-dev
+sudo apt install mpd mpc ncmpcpp libfftw3-dev libncursesw5-dev
 
 systemctl stop mpd.socket
 systemctl stop mpd.service
