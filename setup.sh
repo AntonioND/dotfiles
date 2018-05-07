@@ -79,3 +79,8 @@ mv nausea ~/bin
 # ----------------
 
 sudo apt install neofetch
+
+# Install LXTerminal
+# ------------------
+
+sudo apt install lxterminal
