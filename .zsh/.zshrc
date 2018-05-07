@@ -201,6 +201,7 @@
 
     # Easier name to remember
     alias music='ncmpcpp'
+    alias music-update='mpc update'
 
     # Configuration for music visualizer
     alias nausea='nausea -cps /tmp/mpd.fifo'
