@@ -75,3 +75,7 @@ cd nausea
 make
 mv nausea ~/bin
 
+# Install neofetch
+# ----------------
+
+sudo apt install neofetch
