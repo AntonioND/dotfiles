@@ -139,11 +139,13 @@ nnoremap gV `[v`]
 nmap gc :%s/\s\+$//<CR> :nohlsearch<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Improved TAB key.
-" Indent if at the beginning of a line. If not, do completion.
+" Improved TAB key. Indent at the beginning of a line or after whitespace. If
+" not, do completion.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! CleverTab()
-  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+  if col('.') == 1
+    return "\<Tab>"
+  elseif matchstr(getline('.'), '\%' . (col('.') - 1) . 'c.') =~ '\s'
     return "\<Tab>"
   else
     return "\<C-N>"
