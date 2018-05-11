@@ -326,6 +326,8 @@ EXEC    01;32 # Files with execute permission
 .go     00;93
 .rs     00;93
 .java   00;93
+.vhdl   00;93
+.v      00;93
 
 # Scripting languages (dark yellow)
 *Makefile       00;33
