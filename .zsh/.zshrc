@@ -131,6 +131,12 @@
     # Show list of commits per author
     alias git-authors='git shortlog -s -n --no-merges'
 
+    # Clear reflog and perform garbage collection
+    function git-force-gc() {
+        git reflog expire --expire=all --all
+        git gc --prune=now
+    }
+
     # Checkout the GitHub pull request ID passed as argument
     function git-checkout-pr() {
         if [ -n "$1" ]; then
