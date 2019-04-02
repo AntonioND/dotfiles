@@ -42,12 +42,16 @@ set wrapscan               " Searches wrap around end-of-file.
 set report      =0         " Always report changed lines.
 set synmaxcol   =160       " Only highlight the first 160 columns.
 
+" TAB completion in the vim menu (after pressing ':').
+set wildmenu
+set wildmode=longest:full,full
+
 " Show non-printable characters.
 set list
 let &listchars="tab:> ,trail:_,extends:>,precedes:<,nbsp:$"
 
 " Disable creation of '.netrwhist'
-let g:netrw_dirhistmax = 0
+let g:netrw_dirhistmax=0
 
 " Force 256 colors - Ugly hack
 "set t_Co=256
