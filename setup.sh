@@ -77,3 +77,7 @@ sudo apt install neofetch
 # ------------------
 
 sudo apt install lxterminal
+
+# Set as default in Cinnamon and Budgie desktops
+gsettings set org.cinnamon.desktop.default-applications.terminal exec lxterminal
+gsettings set org.cinnamon.desktop.default-applications.terminal exec-arg '-e'
