@@ -1,12 +1,5 @@
 #!/bin/sh
 
-# neovim config symlink
-# ---------------------
-
-sudo apt install neovim
-
-ln -s -T ~/.vim ~/.config/nvim
-
 # zsh configuration
 # -----------------
 

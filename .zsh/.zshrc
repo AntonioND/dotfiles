@@ -50,7 +50,7 @@
 # Editors
 
     READNULLCMD=${PAGER:-/usr/bin/less}
-    export VISUAL=nvim
+    export VISUAL=vim
     export EDITOR="$VISUAL"
 
 # History
@@ -190,20 +190,8 @@
     # Print information about the sensors in the computer
     alias sensors='watch -c -n 1 sensors'
 
-    # Less typing
-    alias nv='nvim'
-
     # Color config for ripgrep
     alias rg="rg --colors 'path:fg:blue' --colors 'path:style:bold' --colors 'line:fg:green' --colors 'match:style:bold' --colors 'match:fg:yellow'"
-
-    # Always ignore files in a .gitignore and .git/ folders
-    alias exa='exa --git-ignore'
-
-    # Print file information
-    alias el='exa -l'
-
-    # Print tree of file information
-    alias ell='exa -lT'
 
     # Easier name to remember
     alias music='ncmpcpp'
