@@ -109,7 +109,7 @@ endif
 " Known extensions
 au BufRead,BufNewFile *.asm,*.inc set filetype=gameboy_assembly
 au! Syntax gameboy_assembly source $HOME/.vim/syntax/gbz80.vim
-au BufRead,BufNewFile *.S set filetype=arm_assembly
+au BufRead,BufNewFile *.s,*.S set filetype=arm_assembly
 au! Syntax arm_assembly source $HOME/.vim/syntax/armasm.vim
 
 " Trailing spaces - As annoying as they can be
