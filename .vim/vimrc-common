@@ -122,6 +122,11 @@ autocmd BufEnter * let w:m1=matchadd('TrailingSpaces', '\s\+$', -1)
 "autocmd BufEnter * let &colorcolumn="81,".join(range(100,256),",")
 "autocmd BufEnter * highlight colorcolumn ctermbg=darkblue guibg=darkblue
 
+" Fix colors of the signs created by vim-gitgutter
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
 " Folding
 set foldenable          " enable folding
 set foldlevelstart=10   " open most folds by default
