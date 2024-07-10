@@ -58,8 +58,10 @@ let g:netrw_dirhistmax=0
 "set term=xterm-256color
 
 " Hack for tmux
-if &term == "screen-256color"
-  set term=xterm-256color
+if !has('nvim')
+  if &term == "screen-256color"
+    set term=xterm-256color
+  endif
 endif
 
 " Color scheme
@@ -105,6 +107,9 @@ else
     autocmd BufEnter * let w:m3=matchadd('LineOverflow', '\%>80v.\+', -1)
   endif
 endif
+
+" Disable Background Color Erase (BCE) (for tmux)
+set t_ut=
 
 " Known extensions
 au BufRead,BufNewFile *.asm,*.inc set filetype=gameboy_assembly
